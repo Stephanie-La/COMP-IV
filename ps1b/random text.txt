@@ -1,0 +1,30 @@
+CC = g++
+CFLAGS = -g -w -Wall -Werror -ansi -pedantic
+LDLIBS = -lsfml-graphics -lsfml-window -lsfml-system
+
+Photomagic: LFSR.o PhotoMagic.o
+	$(CC) $(CFLAGS) -o Photomagic LFSR.o PhotoMagic.o $(LDLIBS)
+all: Photomagic
+FibLFSR.o: LFSR.cpp LFSR.h
+	$(CC) $(CFLAGS) -c LFSR.cpp
+PhotoMagic.o: PhotoMagic.cpp 
+	$(CC) $(CFLAGS) -c PhotoMagic.cpp
+
+clean:
+	rm *.o Photomagic
+	
+	
+	
+	
+
+FibLFSR::FibLFSR(std::string seed) {
+	while (seed.length() != 16) {
+		cout << "The sequence entered is less or greater than 16. Enter another sequence:";
+		cin >> seed;
+	}
+	while (!isBinary(seed)) {
+		cout << "The string is not a binary number, try again: ";
+		cin >> seed;
+	}
+	s = seed; //initializing seed string
+}
